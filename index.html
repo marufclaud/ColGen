@@ -439,6 +439,139 @@
     border-color: #3a3a42;
   }
 
+  /* ============ Referral Link Card ============ */
+  .link-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, background 0.2s;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 10px 30px -15px rgba(0, 0, 0, 0.7);
+  }
+
+  .link-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(180deg, #fcd116, #003893 50%, #ce1126);
+    opacity: 0.9;
+  }
+
+  .link-card:hover {
+    background: var(--surface-2);
+    border-color: var(--border-hover);
+  }
+
+  .link-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .link-icon {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(252, 209, 22, 0.15), rgba(0, 56, 147, 0.15));
+    border: 1px solid rgba(252, 209, 22, 0.2);
+    color: var(--gold);
+  }
+
+  .link-meta {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .link-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 3px;
+  }
+
+  .link-url {
+    font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-2);
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .link-actions {
+    display: flex;
+    gap: 6px;
+    flex-shrink: 0;
+  }
+
+  .link-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 12px;
+    border-radius: 9px;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    cursor: pointer;
+    transition: all 0.15s;
+    min-height: 36px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text-2);
+    white-space: nowrap;
+  }
+
+  .link-btn:hover {
+    background: var(--surface-2);
+    border-color: var(--border-hover);
+    color: var(--text);
+  }
+
+  .link-btn:active {
+    transform: scale(0.96);
+  }
+
+  .link-btn.copy.copied {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: var(--green);
+  }
+
+  .link-btn.open {
+    background: rgba(252, 209, 22, 0.08);
+    border-color: rgba(252, 209, 22, 0.25);
+    color: var(--gold);
+  }
+
+  .link-btn.open:hover {
+    background: rgba(252, 209, 22, 0.15);
+    border-color: rgba(252, 209, 22, 0.4);
+    color: #ffdd44;
+  }
+
   .section-head {
     display: flex;
     align-items: center;
@@ -987,6 +1120,23 @@
     .formats { grid-template-columns: 1fr; }
   }
 
+  @media (max-width: 480px) {
+    .link-card {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 12px;
+    }
+    .link-actions {
+      justify-content: stretch;
+    }
+    .link-btn {
+      flex: 1;
+    }
+    .link-url {
+      font-size: 11px;
+    }
+  }
+
   @media (min-width: 640px) {
     .overlay { align-items: center; padding: 20px; }
     .sheet {
@@ -1024,6 +1174,39 @@
     <h1>Generate identities<br>in seconds.</h1>
     <p>Realistic Colombian names with strong passwords. Save, search, and export anytime.</p>
   </section>
+
+  <!-- Referral Link Card -->
+  <div class="link-card">
+    <div class="link-info">
+      <div class="link-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+          <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+        </svg>
+      </div>
+      <div class="link-meta">
+        <div class="link-label">Partner Link</div>
+        <div class="link-url" id="refLinkText">https://zulti.com/?r=UEQFEDAPKJ</div>
+      </div>
+    </div>
+    <div class="link-actions">
+      <button class="link-btn copy" id="copyLinkBtn" aria-label="Copy link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <rect x="9" y="9" width="13" height="13" rx="2"/>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>
+        Copy
+      </button>
+      <button class="link-btn open" id="openLinkBtn" aria-label="Open link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+          <polyline points="15 3 21 3 21 9"/>
+          <line x1="10" y1="14" x2="21" y2="3"/>
+        </svg>
+        Open
+      </button>
+    </div>
+  </div>
 
   <div class="card">
     <div class="card-body">
@@ -1197,9 +1380,12 @@ var lastNames = [
   "Castro", "Suárez", "Navarro", "Campos", "Salazar", "Fuentes", "Cortés"
 ];
 
+// ==================== Config ====================
+var REF_LINK = 'https://zulti.com/?r=UEQFEDAPKJ';
+var STORAGE_KEY = 'colgen_v1';
+
 // ==================== State ====================
 var current = { name: "", pass: "", gender: "" };
-var STORAGE_KEY = 'colgen_v1';
 var pendingDeleteId = null;
 
 // ==================== Storage ====================
@@ -1383,7 +1569,7 @@ function renderHistory() {
   }
 }
 
-// ==================== Copy System (Multi-Fallback) ====================
+// ==================== Copy System ====================
 function legacyCopy(text) {
   var textarea = document.createElement('textarea');
   textarea.value = text;
@@ -1428,16 +1614,13 @@ function legacyCopy(text) {
 }
 
 function copyToClipboard(text, callback) {
-  // Try modern clipboard API first
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(function() {
       callback(true);
     }).catch(function() {
-      // Fallback to legacy
       callback(legacyCopy(text));
     });
   } else {
-    // Direct legacy
     callback(legacyCopy(text));
   }
 }
@@ -1451,7 +1634,6 @@ function performCopy(text, btn) {
       }
       toast("Copied to clipboard", "success");
     } else {
-      // Final fallback: prompt
       window.prompt('Copy manually:', text);
       toast("Long-press to copy", "warn");
     }
@@ -1696,7 +1878,24 @@ document.addEventListener('DOMContentLoaded', function() {
     if (e.target.id === 'confirmModal') closeConfirm();
   });
 
-  // Init render
+  // ==================== Referral Link Buttons ====================
+  document.getElementById('copyLinkBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    var btn = this;
+    performCopy(REF_LINK, btn);
+  });
+
+  document.getElementById('openLinkBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    try {
+      window.open(REF_LINK, '_blank', 'noopener,noreferrer');
+    } catch (err) {
+      window.location.href = REF_LINK;
+    }
+    toast("Opening link...", "success");
+  });
+
+  // Init
   renderHistory();
 });
 </script>
