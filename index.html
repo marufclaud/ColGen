@@ -87,6 +87,41 @@
     -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 75%);
   }
 
+  /* ============ AUTH LOADER ============ */
+  #authLoader {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 5000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    transition: opacity 0.4s ease;
+  }
+
+  #authLoader .loader-mark {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #fcd116 0%, #fcd116 45%, #003893 45%, #003893 72%, #ce1126 72%, #ce1126 100%);
+    box-shadow: 0 8px 32px rgba(252, 209, 22, 0.25);
+    animation: loaderPulse 1.5s ease-in-out infinite;
+  }
+
+  #authLoader .loader-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-2);
+    letter-spacing: 0.02em;
+  }
+
+  @keyframes loaderPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.05); opacity: 0.7; }
+  }
+
   .container {
     position: relative;
     z-index: 1;
@@ -94,6 +129,7 @@
     max-width: 680px;
   }
 
+  /* ============ LOGIN SCREEN ============ */
   .login-screen {
     position: fixed;
     inset: 0;
@@ -324,6 +360,7 @@
     line-height: 1.6;
   }
 
+  /* ============ APP HEADER ============ */
   .app-header {
     display: flex;
     align-items: center;
@@ -427,6 +464,7 @@
     margin: 0 auto;
   }
 
+  /* ============ LINK CARD ============ */
   .link-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -542,6 +580,7 @@
     color: #ffdd44;
   }
 
+  /* ============ CARD ============ */
   .card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -796,6 +835,7 @@
     border-color: #3a3a42;
   }
 
+  /* ============ SECTION ============ */
   .section-head {
     display: flex;
     align-items: center;
@@ -916,7 +956,7 @@
     border-radius: 2px;
   }
 
-  /* ============ IDENTITY ROW (NEW) ============ */
+  /* ============ IDENTITY ROW ============ */
   .row {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -1110,6 +1150,7 @@
     color: #f87171;
   }
 
+  /* ============ EMPTY ============ */
   .empty {
     text-align: center;
     padding: 56px 20px;
@@ -1164,6 +1205,7 @@
     to { transform: rotate(360deg); }
   }
 
+  /* ============ TOAST ============ */
   .toast {
     position: fixed;
     bottom: calc(24px + env(safe-area-inset-bottom));
@@ -1203,6 +1245,7 @@
   .toast.warn .toast-dot { background: var(--gold); box-shadow: 0 0 8px var(--gold); }
   .toast.error .toast-dot { background: var(--red); box-shadow: 0 0 8px var(--red); }
 
+  /* ============ OVERLAY & MODALS ============ */
   .overlay {
     position: fixed;
     inset: 0;
@@ -1262,7 +1305,6 @@
     font-weight: 700;
   }
 
-  /* Email Prompt */
   .modal-input-wrap {
     margin-bottom: 16px;
   }
@@ -1393,7 +1435,6 @@
     color: #f87171;
   }
 
-  /* Formats (for export modal) */
   .formats {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1464,6 +1505,7 @@
 
   .modal-cancel:hover { background: #1a1a1f; border-color: var(--border-hover); }
 
+  /* ============ USER DROPDOWN ============ */
   .user-dropdown {
     position: absolute;
     top: 100%;
@@ -1568,8 +1610,14 @@
 
 <div class="ambient"></div>
 
-<!-- LOGIN SCREEN -->
-<div class="login-screen" id="loginScreen">
+<!-- ============ AUTH LOADER ============ -->
+<div id="authLoader">
+  <div class="loader-mark"></div>
+  <div class="loader-text">Loading...</div>
+</div>
+
+<!-- ============ LOGIN SCREEN ============ -->
+<div class="login-screen hidden" id="loginScreen">
   <div class="login-card">
     <div class="login-brand">
       <div class="login-brand-mark"></div>
@@ -1614,7 +1662,7 @@
   </div>
 </div>
 
-<!-- MAIN APP -->
+<!-- ============ MAIN APP ============ -->
 <div class="container" id="appContainer" style="display:none;">
   <header class="app-header">
     <div class="brand">
@@ -1769,7 +1817,7 @@
   </div>
 </div>
 
-<!-- ============ EMAIL PROMPT MODAL (NEW) ============ -->
+<!-- ============ EMAIL PROMPT MODAL ============ -->
 <div class="overlay" id="emailModal">
   <div class="modal-card">
     <div class="modal-icon gold">
@@ -1800,7 +1848,7 @@
   </div>
 </div>
 
-<!-- ============ EDIT MODAL (NEW) ============ -->
+<!-- ============ EDIT MODAL ============ -->
 <div class="overlay" id="editModal">
   <div class="modal-card">
     <div class="modal-icon blue">
@@ -1841,7 +1889,7 @@
   </div>
 </div>
 
-<!-- EXPORT MODAL -->
+<!-- ============ EXPORT MODAL ============ -->
 <div class="overlay" id="downloadModal">
   <div class="modal-card">
     <div class="modal-head">
@@ -1870,7 +1918,7 @@
   </div>
 </div>
 
-<!-- CONFIRM MODAL -->
+<!-- ============ CONFIRM MODAL ============ -->
 <div class="overlay" id="confirmModal">
   <div class="modal-card">
     <div class="modal-icon red">
@@ -1910,6 +1958,15 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 var auth = firebase.auth();
 var db = firebase.firestore();
+
+// 🔐 Persistence: বন্ধ করলেও login থাকবে
+auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+  .then(function() {
+    console.log('✅ Persistence: LOCAL (login will persist)');
+  })
+  .catch(function(err) {
+    console.error('❌ Persistence failed:', err);
+  });
 
 var REF_LINK = 'https://zulti.com/?r=UEQFEDAPKJ';
 
@@ -2147,7 +2204,6 @@ function renderHistory() {
 
     html += '<div class="row" data-id="' + id + '">' +
 
-      // Top: avatar + name + time
       '<div class="row-top">' +
         '<div class="avatar ' + g + '">' + init + '</div>' +
         '<div class="row-head-info">' +
@@ -2156,7 +2212,6 @@ function renderHistory() {
         '</div>' +
       '</div>' +
 
-      // Fields: Name, Password, Email with copy buttons
       '<div class="row-fields">' +
 
         '<div class="row-field">' +
@@ -2196,7 +2251,6 @@ function renderHistory() {
 
       '</div>' +
 
-      // Actions: Edit, Delete
       '<div class="row-actions">' +
         '<button class="row-btn edit" data-edit-id="' + id + '">' +
           '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">' +
@@ -2217,7 +2271,6 @@ function renderHistory() {
   }
   list.innerHTML = html;
 
-  // Field copy buttons
   list.querySelectorAll('[data-copy-field]').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
       e.preventDefault();
@@ -2228,7 +2281,6 @@ function renderHistory() {
     });
   });
 
-  // Edit buttons
   list.querySelectorAll('[data-edit-id]').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
       e.preventDefault();
@@ -2238,7 +2290,6 @@ function renderHistory() {
     });
   });
 
-  // Delete buttons
   list.querySelectorAll('[data-del-id]').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
       e.preventDefault();
@@ -2630,8 +2681,17 @@ function signInWithGoogle() {
   hideAuthError();
   setAuthLoading(true);
   var provider = new firebase.auth.GoogleAuthProvider();
-  auth.signInWithPopup(provider)
-    .then(function() { setAuthLoading(false); })
+  provider.setCustomParameters({ prompt: 'select_account' });
+
+  // Ensure LOCAL persistence before signing in
+  auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+    .then(function() {
+      return auth.signInWithPopup(provider);
+    })
+    .then(function(result) {
+      setAuthLoading(false);
+      toast("Welcome back, " + (result.user.displayName || 'User') + "!", "success");
+    })
     .catch(function(err) {
       setAuthLoading(false);
       showAuthError(friendlyAuthError(err));
@@ -2649,11 +2709,23 @@ function emailAuth() {
   }
   hideAuthError();
   setAuthLoading(true);
-  var promise = authMode === 'signup'
-    ? auth.createUserWithEmailAndPassword(email, password)
-    : auth.signInWithEmailAndPassword(email, password);
-  promise
-    .then(function() { setAuthLoading(false); })
+
+  // Ensure LOCAL persistence before signing in
+  auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+    .then(function() {
+      var promise = authMode === 'signup'
+        ? auth.createUserWithEmailAndPassword(email, password)
+        : auth.signInWithEmailAndPassword(email, password);
+      return promise;
+    })
+    .then(function(result) {
+      setAuthLoading(false);
+      if (authMode === 'signup') {
+        toast("Account created!", "success");
+      } else {
+        toast("Welcome back!", "success");
+      }
+    })
     .catch(function(err) {
       setAuthLoading(false);
       showAuthError(friendlyAuthError(err));
@@ -2666,9 +2738,20 @@ function signOutUser() {
     .catch(function(err) { toast("Sign out failed", "error"); });
 }
 
+// ==================== Auth State ====================
 auth.onAuthStateChanged(function(user) {
   var loginScreen = document.getElementById('loginScreen');
   var appContainer = document.getElementById('appContainer');
+  var loader = document.getElementById('authLoader');
+
+  // Hide loader
+  if (loader) {
+    loader.style.opacity = '0';
+    setTimeout(function() {
+      loader.style.display = 'none';
+    }, 400);
+  }
+
   if (user) {
     currentUser = user;
     loginScreen.classList.add('hidden');
@@ -2782,7 +2865,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (e.target.id === 'confirmModal') closeConfirm();
   });
 
-  // Referral
+  // Referral link
   document.getElementById('copyLinkBtn').addEventListener('click', function(e) {
     e.preventDefault();
     performCopy(REF_LINK, this);
