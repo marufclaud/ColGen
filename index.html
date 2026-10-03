@@ -903,8 +903,8 @@
   .list {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    max-height: 420px;
+    gap: 8px;
+    max-height: 500px;
     overflow-y: auto;
     padding-right: 2px;
     -webkit-overflow-scrolling: touch;
@@ -916,14 +916,12 @@
     border-radius: 2px;
   }
 
+  /* ============ IDENTITY ROW (NEW) ============ */
   .row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 14px;
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 14px;
+    padding: 14px;
     transition: all 0.15s;
     animation: fadeUp 0.3s ease;
   }
@@ -933,11 +931,18 @@
     border-color: var(--border-hover);
   }
 
+  .row-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+
   .avatar {
     flex-shrink: 0;
     width: 38px;
     height: 38px;
-    border-radius: 9px;
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -950,35 +955,25 @@
   .avatar.male { background: linear-gradient(135deg, #2b5796, #1e3a6e); }
   .avatar.female { background: linear-gradient(135deg, #a8427a, #7a2e56); }
 
-  .row-info { flex: 1; min-width: 0; }
+  .row-head-info { flex: 1; min-width: 0; }
 
   .row-name {
     display: flex;
     align-items: center;
     gap: 7px;
-    font-size: 13.5px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 700;
     color: var(--text);
     margin-bottom: 3px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    letter-spacing: -0.005em;
   }
 
   .gd { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
   .gd.male { background: var(--male); box-shadow: 0 0 6px rgba(74, 158, 255, 0.6); }
   .gd.female { background: var(--female); box-shadow: 0 0 6px rgba(255, 111, 181, 0.6); }
-
-  .row-pass {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11.5px;
-    font-weight: 500;
-    color: var(--text-2);
-    margin-bottom: 3px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
 
   .row-time {
     font-size: 10.5px;
@@ -986,32 +981,132 @@
     font-weight: 500;
   }
 
-  .row-actions { display: flex; gap: 2px; flex-shrink: 0; }
+  .row-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
 
-  .icon-btn {
-    width: 34px;
-    height: 34px;
+  .row-field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #0a0a0c;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 8px 10px;
+    transition: all 0.15s;
+  }
+
+  .row-field:hover {
+    border-color: var(--border-hover);
+  }
+
+  .row-field-label {
+    flex-shrink: 0;
+    font-size: 9.5px;
+    font-weight: 700;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    min-width: 46px;
+  }
+
+  .row-field-value {
+    flex: 1;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--text-2);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    letter-spacing: -0.005em;
+  }
+
+  .row-field-value.pass {
+    font-family: 'JetBrains Mono', 'SF Mono', ui-monospace, monospace;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .row-field-value.email {
+    font-size: 12px;
+    color: var(--text-2);
+  }
+
+  .field-copy-btn {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
     display: flex;
     align-items: center;
     justify-content: center;
     background: transparent;
     border: 1px solid transparent;
-    border-radius: 8px;
+    border-radius: 6px;
     color: var(--text-3);
     cursor: pointer;
     transition: all 0.15s;
   }
 
-  .icon-btn:hover {
+  .field-copy-btn:hover {
     background: var(--surface-2);
     border-color: var(--border);
-    color: var(--text-2);
+    color: var(--text);
   }
 
-  .icon-btn:active { transform: scale(0.9); }
-  .icon-btn.del:hover {
+  .field-copy-btn:active { transform: scale(0.9); }
+
+  .field-copy-btn.copied {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+    color: var(--green);
+  }
+
+  .row-actions {
+    display: flex;
+    gap: 6px;
+    justify-content: flex-end;
+  }
+
+  .row-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 11px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: all 0.15s;
+    min-height: 32px;
+    letter-spacing: -0.005em;
+  }
+
+  .row-btn:hover {
+    background: var(--surface-2);
+    border-color: var(--border-hover);
+    color: var(--text);
+  }
+
+  .row-btn:active { transform: scale(0.96); }
+
+  .row-btn.edit:hover {
+    background: rgba(74, 158, 255, 0.08);
+    border-color: rgba(74, 158, 255, 0.3);
+    color: var(--male);
+  }
+
+  .row-btn.del:hover {
     background: rgba(239, 68, 68, 0.08);
-    border-color: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.3);
     color: #f87171;
   }
 
@@ -1114,47 +1209,191 @@
     background: rgba(0, 0, 0, 0.75);
     backdrop-filter: blur(12px);
     display: none;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
     z-index: 1000;
     opacity: 0;
     transition: opacity 0.25s;
+    padding: 20px;
   }
 
   .overlay.show { display: flex; opacity: 1; }
 
-  .sheet {
+  .modal-card {
     background: var(--surface);
-    border-top: 1px solid var(--border-hover);
-    border-radius: 24px 24px 0 0;
-    padding: 8px 20px calc(24px + env(safe-area-inset-bottom));
+    border: 1px solid var(--border-hover);
+    border-radius: 20px;
+    padding: 24px;
     width: 100%;
-    max-width: 500px;
-    transform: translateY(100%);
-    transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
-    max-height: 90vh;
-    overflow-y: auto;
+    max-width: 400px;
+    transform: scale(0.95);
+    transition: transform 0.25s cubic-bezier(0.32, 0.72, 0, 1);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+    animation: fadeUp 0.3s ease;
   }
 
-  .overlay.show .sheet { transform: translateY(0); }
-
-  .handle {
-    width: 36px;
-    height: 4px;
-    background: var(--border-hover);
-    border-radius: 2px;
-    margin: 8px auto 20px;
+  .overlay.show .modal-card {
+    transform: scale(1);
   }
 
-  .sheet-head { margin-bottom: 20px; text-align: center; }
-  .sheet-head h3 {
+  .modal-head {
+    margin-bottom: 18px;
+  }
+
+  .modal-head h3 {
     font-size: 17px;
     font-weight: 700;
     color: var(--text);
-    margin-bottom: 4px;
+    margin-bottom: 5px;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
-  .sheet-head p { font-size: 12.5px; color: var(--text-2); }
 
+  .modal-head p {
+    font-size: 12.5px;
+    color: var(--text-2);
+    line-height: 1.5;
+  }
+
+  .modal-head p strong {
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  /* Email Prompt */
+  .modal-input-wrap {
+    margin-bottom: 16px;
+  }
+
+  .modal-input-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text-3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+  }
+
+  .modal-input {
+    width: 100%;
+    padding: 13px 14px;
+    background: #0a0a0c;
+    border: 1px solid var(--border);
+    border-radius: 11px;
+    font-family: inherit;
+    font-size: 16px;
+    color: var(--text);
+    outline: none;
+    transition: all 0.2s;
+    -webkit-appearance: none;
+    letter-spacing: -0.005em;
+  }
+
+  .modal-input::placeholder { color: var(--text-3); }
+  .modal-input:focus {
+    border-color: rgba(252, 209, 22, 0.4);
+    background: var(--surface-2);
+    box-shadow: 0 0 0 3px rgba(252, 209, 22, 0.08);
+  }
+
+  .modal-actions {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 8px;
+  }
+
+  .modal-btn {
+    padding: 13px;
+    border-radius: 11px;
+    font-family: inherit;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+    min-height: 46px;
+    border: none;
+    letter-spacing: -0.005em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  .modal-btn:active { transform: scale(0.97); }
+  .modal-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .modal-btn.skip {
+    background: var(--surface-2);
+    color: var(--text-2);
+    border: 1px solid var(--border);
+  }
+
+  .modal-btn.skip:hover {
+    background: #1a1a1f;
+    border-color: var(--border-hover);
+    color: var(--text);
+  }
+
+  .modal-btn.primary {
+    background: #fff;
+    color: #08080a;
+    box-shadow: 0 4px 16px rgba(255, 255, 255, 0.1);
+  }
+
+  .modal-btn.primary:hover { background: #f4f4f5; }
+
+  .modal-btn.save {
+    background: var(--gold);
+    color: #08080a;
+    box-shadow: 0 4px 16px rgba(252, 209, 22, 0.3);
+  }
+
+  .modal-btn.save:hover { background: #ffdd44; }
+
+  .modal-btn.danger {
+    background: #dc2626;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(220, 38, 38, 0.3);
+  }
+
+  .modal-btn.danger:hover { background: #b91c1c; }
+
+  .modal-actions.full {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .modal-icon {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+  }
+
+  .modal-icon.gold {
+    background: rgba(252, 209, 22, 0.1);
+    border: 1px solid rgba(252, 209, 22, 0.25);
+    color: var(--gold);
+  }
+
+  .modal-icon.blue {
+    background: rgba(74, 158, 255, 0.1);
+    border: 1px solid rgba(74, 158, 255, 0.25);
+    color: var(--male);
+  }
+
+  .modal-icon.red {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    color: #f87171;
+  }
+
+  /* Formats (for export modal) */
   .formats {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -1166,10 +1405,10 @@
     background: var(--surface-2);
     border: 1px solid var(--border);
     border-radius: 14px;
-    padding: 18px 14px;
+    padding: 16px 14px;
     cursor: pointer;
     transition: all 0.15s;
-    min-height: 100px;
+    min-height: 92px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -1184,14 +1423,14 @@
   .fmt:active { transform: scale(0.97); }
 
   .fmt-icon {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
     border-radius: 9px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
-    font-size: 16px;
+    margin-bottom: 8px;
+    font-size: 15px;
   }
 
   .fmt-icon.csv { background: rgba(16, 185, 129, 0.1); color: var(--green); }
@@ -1208,111 +1447,22 @@
 
   .fmt-desc { font-size: 10.5px; color: var(--text-3); font-weight: 500; }
 
-  .sheet-cancel {
+  .modal-cancel {
     width: 100%;
-    padding: 14px;
+    padding: 13px;
     background: var(--surface-2);
     border: 1px solid var(--border);
-    border-radius: 12px;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text);
-    cursor: pointer;
-    min-height: 48px;
-  }
-
-  .sheet-cancel:hover { background: #1a1a1f; border-color: var(--border-hover); }
-
-  .confirm-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.75);
-    backdrop-filter: blur(12px);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 1001;
-    opacity: 0;
-    transition: opacity 0.25s;
-    padding: 20px;
-  }
-
-  .confirm-overlay.show { display: flex; opacity: 1; }
-
-  .confirm-sheet {
-    background: var(--surface);
-    border: 1px solid var(--border-hover);
-    border-radius: 20px;
-    padding: 24px;
-    width: 100%;
-    max-width: 380px;
-    transform: scale(0.95);
-    transition: transform 0.25s;
-    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
-  }
-
-  .confirm-overlay.show .confirm-sheet { transform: scale(1); }
-
-  .confirm-icon {
-    width: 44px;
-    height: 44px;
-    margin: 0 auto 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(239, 68, 68, 0.1);
-    border: 1px solid rgba(239, 68, 68, 0.25);
-    border-radius: 12px;
-    color: #f87171;
-  }
-
-  .confirm-sheet h3 {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text);
-    text-align: center;
-    margin-bottom: 6px;
-  }
-
-  .confirm-sheet p {
-    font-size: 13px;
-    color: var(--text-2);
-    text-align: center;
-    line-height: 1.5;
-    margin-bottom: 20px;
-  }
-
-  .confirm-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-
-  .confirm-btn {
-    padding: 12px;
-    border: none;
     border-radius: 11px;
     font-family: inherit;
     font-size: 13.5px;
     font-weight: 600;
-    cursor: pointer;
-    min-height: 44px;
-  }
-
-  .confirm-btn.cancel {
-    background: var(--surface-2);
     color: var(--text);
-    border: 1px solid var(--border);
+    cursor: pointer;
+    min-height: 46px;
+    transition: all 0.15s;
   }
 
-  .confirm-btn.danger {
-    background: #dc2626;
-    color: #fff;
-    box-shadow: 0 4px 16px rgba(220, 38, 38, 0.3);
-  }
-
-  .confirm-btn.danger:hover { background: #b91c1c; }
+  .modal-cancel:hover { background: #1a1a1f; border-color: var(--border-hover); }
 
   .user-dropdown {
     position: absolute;
@@ -1403,25 +1553,14 @@
     .tools { width: 100%; }
     .tool { flex: 1; justify-content: center; }
     .formats { grid-template-columns: 1fr; }
+    .modal-actions { grid-template-columns: 1fr; }
+    .modal-actions.full { grid-template-columns: 1fr; }
   }
 
   @media (max-width: 480px) {
     .link-card { flex-direction: column; align-items: stretch; gap: 12px; }
     .link-actions { justify-content: stretch; }
     .link-btn { flex: 1; }
-  }
-
-  @media (min-width: 640px) {
-    .overlay { align-items: center; padding: 20px; }
-    .sheet {
-      border-radius: 20px;
-      border: 1px solid var(--border-hover);
-      padding: 20px;
-      transform: scale(0.95);
-      max-height: 85vh;
-    }
-    .overlay.show .sheet { transform: scale(1); }
-    .handle { display: none; }
   }
 </style>
 </head>
@@ -1630,10 +1769,82 @@
   </div>
 </div>
 
+<!-- ============ EMAIL PROMPT MODAL (NEW) ============ -->
+<div class="overlay" id="emailModal">
+  <div class="modal-card">
+    <div class="modal-icon gold">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+    </div>
+    <div class="modal-head">
+      <h3>Add Email</h3>
+      <p>Attach an email to this identity: <strong id="emailModalName">—</strong></p>
+    </div>
+    <div class="modal-input-wrap">
+      <label class="modal-input-label" for="modalEmailInput">Email Address</label>
+      <input type="email" class="modal-input" id="modalEmailInput" placeholder="you@example.com" autocomplete="email">
+    </div>
+    <div class="modal-actions">
+      <button class="modal-btn skip" id="emailSkipBtn" type="button">
+        Skip
+      </button>
+      <button class="modal-btn save" id="emailAddBtn" type="button">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        Add & Save
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ EDIT MODAL (NEW) ============ -->
+<div class="overlay" id="editModal">
+  <div class="modal-card">
+    <div class="modal-icon blue">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+      </svg>
+    </div>
+    <div class="modal-head">
+      <h3>Edit Identity</h3>
+      <p>Update the fields below</p>
+    </div>
+
+    <div class="modal-input-wrap">
+      <label class="modal-input-label" for="editNameInput">Full Name</label>
+      <input type="text" class="modal-input" id="editNameInput" placeholder="Full name">
+    </div>
+
+    <div class="modal-input-wrap">
+      <label class="modal-input-label" for="editPassInput">Password</label>
+      <input type="text" class="modal-input" id="editPassInput" placeholder="Password" style="font-family: 'JetBrains Mono', monospace;">
+    </div>
+
+    <div class="modal-input-wrap">
+      <label class="modal-input-label" for="editEmailInput">Email (optional)</label>
+      <input type="email" class="modal-input" id="editEmailInput" placeholder="you@example.com" autocomplete="email">
+    </div>
+
+    <div class="modal-actions full">
+      <button class="modal-btn skip" id="editCancelBtn" type="button">Cancel</button>
+      <button class="modal-btn save" id="editSaveBtn" type="button">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        Save
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- EXPORT MODAL -->
 <div class="overlay" id="downloadModal">
-  <div class="sheet">
-    <div class="handle"></div>
-    <div class="sheet-head">
+  <div class="modal-card">
+    <div class="modal-head">
       <h3>Export Identities</h3>
       <p id="downloadInfo">Choose a format</p>
     </div>
@@ -1655,20 +1866,23 @@
         <div class="fmt-desc">Styled report</div>
       </div>
     </div>
-    <button class="sheet-cancel" id="closeDownloadBtn">Cancel</button>
+    <button class="modal-cancel" id="closeDownloadBtn">Cancel</button>
   </div>
 </div>
 
-<div class="confirm-overlay" id="confirmModal">
-  <div class="confirm-sheet">
-    <div class="confirm-icon">
+<!-- CONFIRM MODAL -->
+<div class="overlay" id="confirmModal">
+  <div class="modal-card">
+    <div class="modal-icon red">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
     </div>
-    <h3 id="confirmTitle">Delete identity?</h3>
-    <p id="confirmMsg">This action cannot be undone.</p>
-    <div class="confirm-actions">
-      <button class="confirm-btn cancel" id="confirmCancelBtn">Cancel</button>
-      <button class="confirm-btn danger" id="confirmOkBtn">Delete</button>
+    <div class="modal-head" style="text-align:center;">
+      <h3 id="confirmTitle" style="justify-content:center;">Delete identity?</h3>
+      <p id="confirmMsg">This action cannot be undone.</p>
+    </div>
+    <div class="modal-actions full">
+      <button class="modal-btn skip" id="confirmCancelBtn">Cancel</button>
+      <button class="modal-btn danger" id="confirmOkBtn">Delete</button>
     </div>
   </div>
 </div>
@@ -1684,9 +1898,6 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 
 <script>
-// ==================================================
-// 🔥 FIREBASE CONFIG — MARUF'S PROJECT 🔥
-// ==================================================
 var firebaseConfig = {
   apiKey: "AIzaSyBUEksRd9Tr2LL6f34saNnAfKkEYnijyIQ",
   authDomain: "colgen-7fded.firebaseapp.com",
@@ -1696,12 +1907,10 @@ var firebaseConfig = {
   appId: "1:968226048376:web:2758408c81e710ff38a08d"
 };
 
-// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 var auth = firebase.auth();
 var db = firebase.firestore();
 
-// ==================== App Config ====================
 var REF_LINK = 'https://zulti.com/?r=UEQFEDAPKJ';
 
 // ==================== Names Data ====================
@@ -1735,6 +1944,7 @@ var current = { name: "", pass: "", gender: "" };
 var currentUser = null;
 var identities = [];
 var pendingDeleteId = null;
+var editingId = null;
 var authMode = 'signin';
 
 // ==================== Generate ====================
@@ -1756,12 +1966,10 @@ function makePassword(len) {
   var N = "0123456789";
   var S = "!@#$%&*?";
   var all = U + L + N + S;
-
   var p = U[Math.floor(Math.random() * U.length)] +
           L[Math.floor(Math.random() * L.length)] +
           N[Math.floor(Math.random() * N.length)] +
           S[Math.floor(Math.random() * S.length)];
-
   for (var i = p.length; i < len; i++) {
     p += all[Math.floor(Math.random() * all.length)];
   }
@@ -1772,7 +1980,6 @@ function generate() {
   var len = parseInt(document.getElementById('passLength').value, 10) || 12;
   var result = makeName();
   var pass = makePassword(len);
-
   var nameEl = document.getElementById('nameOutput');
   var passEl = document.getElementById('passOutput');
   var tag = document.getElementById('genderTag');
@@ -1792,8 +1999,8 @@ function generate() {
   current = { name: result.name, pass: pass, gender: result.gender };
 }
 
-// ==================== Save to Firestore ====================
-function saveData() {
+// ==================== Save flow ====================
+function startSave() {
   if (!current.name) {
     toast("Generate first", "warn");
     return;
@@ -1802,11 +2009,26 @@ function saveData() {
     toast("Not signed in", "error");
     return;
   }
+  document.getElementById('emailModalName').textContent = current.name;
+  document.getElementById('modalEmailInput').value = '';
+  document.getElementById('emailModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+  setTimeout(function() {
+    document.getElementById('modalEmailInput').focus();
+  }, 300);
+}
 
+function closeEmailModal() {
+  document.getElementById('emailModal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function actuallySave(email) {
   var newItem = {
     name: current.name,
     pass: current.pass,
     gender: current.gender,
+    email: email || '',
     time: new Date().toLocaleString('en-GB', {
       day: '2-digit', month: 'short', year: 'numeric',
       hour: '2-digit', minute: '2-digit'
@@ -1816,6 +2038,7 @@ function saveData() {
 
   identities.unshift(newItem);
   renderHistory();
+  closeEmailModal();
 
   db.collection('users').doc(currentUser.uid).set({
     email: currentUser.email,
@@ -1833,10 +2056,26 @@ function saveData() {
     });
 }
 
+function saveWithEmail() {
+  var email = document.getElementById('modalEmailInput').value.trim();
+  if (email && !isValidEmail(email)) {
+    toast("Invalid email address", "warn");
+    return;
+  }
+  actuallySave(email);
+}
+
+function saveSkipEmail() {
+  actuallySave('');
+}
+
+function isValidEmail(s) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(s);
+}
+
 // ==================== Load data ====================
 function loadUserData() {
   if (!currentUser) return;
-
   document.getElementById('loadingState').classList.add('show');
   document.getElementById('historyList').innerHTML = '';
 
@@ -1879,7 +2118,10 @@ function escapeHtml(s) {
 function renderHistory() {
   var list = document.getElementById('historyList');
   var q = document.getElementById('searchBox').value.toLowerCase();
-  var data = q ? identities.filter(function(d) { return (d.name || '').toLowerCase().indexOf(q) !== -1; }) : identities;
+  var data = q ? identities.filter(function(d) {
+    return (d.name || '').toLowerCase().indexOf(q) !== -1 ||
+           (d.email || '').toLowerCase().indexOf(q) !== -1;
+  }) : identities;
 
   document.getElementById('countBadge').textContent = identities.length;
 
@@ -1901,39 +2143,102 @@ function renderHistory() {
     var init = (d.name || '?').charAt(0).toUpperCase();
     var g = d.gender || 'male';
     var id = d.rawTime || 0;
-    html += '<div class="row">' +
-      '<div class="avatar ' + g + '">' + init + '</div>' +
-      '<div class="row-info">' +
-        '<div class="row-name"><span class="gd ' + g + '"></span>' + escapeHtml(d.name) + '</div>' +
-        '<div class="row-pass">' + escapeHtml(d.pass) + '</div>' +
-        '<div class="row-time">' + escapeHtml(d.time || '') + '</div>' +
+    var email = d.email || '';
+
+    html += '<div class="row" data-id="' + id + '">' +
+
+      // Top: avatar + name + time
+      '<div class="row-top">' +
+        '<div class="avatar ' + g + '">' + init + '</div>' +
+        '<div class="row-head-info">' +
+          '<div class="row-name"><span class="gd ' + g + '"></span>' + escapeHtml(d.name) + '</div>' +
+          '<div class="row-time">' + escapeHtml(d.time || '') + '</div>' +
+        '</div>' +
       '</div>' +
+
+      // Fields: Name, Password, Email with copy buttons
+      '<div class="row-fields">' +
+
+        '<div class="row-field">' +
+          '<span class="row-field-label">Name</span>' +
+          '<span class="row-field-value">' + escapeHtml(d.name) + '</span>' +
+          '<button class="field-copy-btn" data-copy-field="name" data-copy-id="' + id + '" title="Copy name">' +
+            '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+            '<rect x="9" y="9" width="13" height="13" rx="2"/>' +
+            '<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>' +
+          '</button>' +
+        '</div>' +
+
+        '<div class="row-field">' +
+          '<span class="row-field-label">Pass</span>' +
+          '<span class="row-field-value pass">' + escapeHtml(d.pass) + '</span>' +
+          '<button class="field-copy-btn" data-copy-field="pass" data-copy-id="' + id + '" title="Copy password">' +
+            '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+            '<rect x="9" y="9" width="13" height="13" rx="2"/>' +
+            '<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>' +
+          '</button>' +
+        '</div>' +
+
+        '<div class="row-field">' +
+          '<span class="row-field-label">Email</span>' +
+          '<span class="row-field-value email">' + (email ? escapeHtml(email) : '<span style="color:var(--text-3);font-style:italic;">— none —</span>') + '</span>' +
+          (email ?
+            '<button class="field-copy-btn" data-copy-field="email" data-copy-id="' + id + '" title="Copy email">' +
+              '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+              '<rect x="9" y="9" width="13" height="13" rx="2"/>' +
+              '<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>' +
+            '</button>' :
+            '<button class="field-copy-btn" data-edit-id="' + id + '" title="Add email">' +
+              '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">' +
+              '<line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>' +
+            '</button>') +
+        '</div>' +
+
+      '</div>' +
+
+      // Actions: Edit, Delete
       '<div class="row-actions">' +
-        '<button class="icon-btn" data-copy-id="' + id + '" aria-label="Copy">' +
-          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
-          '<rect x="9" y="9" width="13" height="13" rx="2"/>' +
-          '<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>' +
+        '<button class="row-btn edit" data-edit-id="' + id + '">' +
+          '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">' +
+          '<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>' +
+          '<path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>' +
+          'Edit' +
         '</button>' +
-        '<button class="icon-btn del" data-del-id="' + id + '" aria-label="Delete">' +
-          '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
+        '<button class="row-btn del" data-del-id="' + id + '">' +
+          '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">' +
           '<polyline points="3 6 5 6 21 6"/>' +
           '<path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>' +
           '<path d="M10 11v6M14 11v6"/></svg>' +
+          'Delete' +
         '</button>' +
       '</div>' +
+
     '</div>';
   }
   list.innerHTML = html;
 
-  list.querySelectorAll('[data-copy-id]').forEach(function(btn) {
+  // Field copy buttons
+  list.querySelectorAll('[data-copy-field]').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
       e.preventDefault();
       e.stopPropagation();
       var id = parseInt(this.getAttribute('data-copy-id'), 10);
-      copyItem(id, this);
+      var field = this.getAttribute('data-copy-field');
+      copyField(id, field, this);
     });
   });
 
+  // Edit buttons
+  list.querySelectorAll('[data-edit-id]').forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var id = parseInt(this.getAttribute('data-edit-id'), 10);
+      openEditModal(id);
+    });
+  });
+
+  // Delete buttons
   list.querySelectorAll('[data-del-id]').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
       e.preventDefault();
@@ -2013,13 +2318,22 @@ function performCopy(text, btn) {
   });
 }
 
-function copyItem(id, btn) {
-  var item = null;
+function findById(id) {
   for (var i = 0; i < identities.length; i++) {
-    if (identities[i].rawTime === id) { item = identities[i]; break; }
+    if (identities[i].rawTime === id) return identities[i];
   }
+  return null;
+}
+
+function copyField(id, field, btn) {
+  var item = findById(id);
   if (!item) return;
-  performCopy(item.name + ' | ' + item.pass, btn);
+  var text = '';
+  if (field === 'name') text = item.name;
+  else if (field === 'pass') text = item.pass;
+  else if (field === 'email') text = item.email;
+  if (!text) { toast("Nothing to copy", "warn"); return; }
+  performCopy(text, btn);
 }
 
 function copyLiveText(id, btnId) {
@@ -2031,14 +2345,69 @@ function copyLiveText(id, btnId) {
   performCopy(el.textContent, document.getElementById(btnId));
 }
 
+// ==================== Edit Modal ====================
+function openEditModal(id) {
+  var item = findById(id);
+  if (!item) return;
+  editingId = id;
+  document.getElementById('editNameInput').value = item.name || '';
+  document.getElementById('editPassInput').value = item.pass || '';
+  document.getElementById('editEmailInput').value = item.email || '';
+  document.getElementById('editModal').classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeEditModal() {
+  editingId = null;
+  document.getElementById('editModal').classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+function saveEdit() {
+  if (!editingId) return;
+  var newName = document.getElementById('editNameInput').value.trim();
+  var newPass = document.getElementById('editPassInput').value.trim();
+  var newEmail = document.getElementById('editEmailInput').value.trim();
+
+  if (!newName) { toast("Name required", "warn"); return; }
+  if (!newPass) { toast("Password required", "warn"); return; }
+  if (newEmail && !isValidEmail(newEmail)) {
+    toast("Invalid email", "warn");
+    return;
+  }
+
+  var idx = -1;
+  for (var i = 0; i < identities.length; i++) {
+    if (identities[i].rawTime === editingId) { idx = i; break; }
+  }
+  if (idx === -1) return;
+
+  var before = identities.slice();
+  identities[idx] = Object.assign({}, identities[idx], {
+    name: newName,
+    pass: newPass,
+    email: newEmail
+  });
+
+  renderHistory();
+  closeEditModal();
+
+  db.collection('users').doc(currentUser.uid).set({
+    identities: identities,
+    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+  }, { merge: true })
+    .then(function() { toast("Updated", "success"); })
+    .catch(function(err) {
+      identities = before;
+      renderHistory();
+      toast("Update failed", "error");
+    });
+}
+
 // ==================== Delete ====================
 function askDelete(id) {
-  var item = null;
-  for (var i = 0; i < identities.length; i++) {
-    if (identities[i].rawTime === id) { item = identities[i]; break; }
-  }
+  var item = findById(id);
   if (!item) return;
-
   pendingDeleteId = id;
   document.getElementById('confirmTitle').textContent = 'Delete this identity?';
   document.getElementById('confirmMsg').textContent = item.name + ' — this cannot be undone.';
@@ -2103,7 +2472,7 @@ function closeConfirm() {
   document.body.style.overflow = '';
 }
 
-// ==================== Download Modal ====================
+// ==================== Export Modal ====================
 function openDownloadModal() {
   if (identities.length === 0) {
     toast("Nothing to export", "warn");
@@ -2130,10 +2499,10 @@ function downloadFile(fmt) {
 
   if (fmt === 'csv') {
     mime = 'text/csv;charset=utf-8;';
-    content = '\uFEFF' + 'Name,Gender,Password,Saved At\n';
+    content = '\uFEFF' + 'Name,Password,Email,Saved At\n';
     for (var i = 0; i < data.length; i++) {
       var d = data[i];
-      content += '"' + d.name + '","' + (d.gender || '') + '","' + d.pass + '","' + (d.time || '') + '"\n';
+      content += '"' + (d.name || '') + '","' + (d.pass || '') + '","' + (d.email || '') + '","' + (d.time || '') + '"\n';
     }
   } else if (fmt === 'json') {
     mime = 'application/json';
@@ -2143,8 +2512,9 @@ function downloadFile(fmt) {
     content = 'ColGen — Saved Identities\nExported: ' + new Date().toLocaleString() + '\nTotal: ' + data.length + '\n' + new Array(51).join('=') + '\n\n';
     for (var j = 0; j < data.length; j++) {
       var dd = data[j];
-      content += (j + 1) + '. ' + dd.name + '  [' + (dd.gender || '').toUpperCase() + ']\n';
-      content += '   Password: ' + dd.pass + '\n';
+      content += (j + 1) + '. ' + (dd.name || '') + '  [' + (dd.gender || '').toUpperCase() + ']\n';
+      content += '   Password: ' + (dd.pass || '') + '\n';
+      content += '   Email: ' + (dd.email || '—') + '\n';
       content += '   Saved: ' + (dd.time || '') + '\n\n';
     }
   } else if (fmt === 'html') {
@@ -2154,17 +2524,22 @@ function downloadFile(fmt) {
       '<style>*{box-sizing:border-box}body{font-family:-apple-system,Inter,sans-serif;background:#08080a;color:#fff;padding:24px;margin:0}' +
       'h1{color:#fff;margin:0 0 6px;font-size:24px}.meta{color:#71717a;font-size:13px;margin-bottom:28px}' +
       '.row{background:#0f0f12;border:1px solid #1f1f24;border-radius:12px;padding:16px;margin-bottom:10px}' +
-      '.name{font-size:15px;font-weight:600;margin-bottom:4px;display:flex;align-items:center;gap:8px}' +
+      '.name{font-size:15px;font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:8px}' +
       '.dot{width:6px;height:6px;border-radius:50%}.dot.male{background:#4a9eff}.dot.female{background:#ff6fb5}' +
-      '.pass{font-family:monospace;color:#fcd116;font-size:13px;margin-bottom:4px}.time{color:#52525b;font-size:11px}' +
+      '.field{display:flex;gap:8px;margin-bottom:4px;font-size:13px}' +
+      '.label{color:#71717a;min-width:60px;font-size:11px;text-transform:uppercase;letter-spacing:0.05em}' +
+      '.pass{font-family:monospace;color:#fcd116}.time{color:#52525b;font-size:11px}' +
       '@media(min-width:600px){body{padding:48px}}</style></head><body>' +
       '<h1>🇨🇴 ColGen Export</h1>' +
       '<p class="meta">' + new Date().toLocaleString() + ' · ' + data.length + ' identities</p>';
     for (var k = 0; k < data.length; k++) {
       var item = data[k];
       content += '<div class="row"><div class="name"><span class="dot ' + (item.gender || 'male') + '"></span>' +
-        (k + 1) + '. ' + item.name + '</div><div class="pass">' + item.pass + '</div>' +
-        '<div class="time">' + (item.time || '') + '</div></div>';
+        (k + 1) + '. ' + item.name + '</div>' +
+        '<div class="field"><span class="label">Pass</span><span class="pass">' + (item.pass || '') + '</span></div>' +
+        '<div class="field"><span class="label">Email</span><span>' + (item.email || '—') + '</span></div>' +
+        '<div class="field"><span class="label">Saved</span><span class="time">' + (item.time || '') + '</span></div>' +
+        '</div>';
     }
     content += '</body></html>';
   }
@@ -2194,7 +2569,7 @@ function toast(msg, type) {
   t._t = setTimeout(function() { t.classList.remove('show'); }, 2200);
 }
 
-// ==================== Auth UI ====================
+// ==================== Auth ====================
 function showAuthError(msg) {
   var el = document.getElementById('authError');
   el.textContent = msg;
@@ -2266,21 +2641,17 @@ function signInWithGoogle() {
 function emailAuth() {
   var email = document.getElementById('emailInput').value.trim();
   var password = document.getElementById('passwordInput').value;
-
   if (!email) { showAuthError('Please enter your email'); return; }
   if (!password) { showAuthError('Please enter your password'); return; }
   if (authMode === 'signup' && password.length < 6) {
     showAuthError('Password must be at least 6 characters');
     return;
   }
-
   hideAuthError();
   setAuthLoading(true);
-
   var promise = authMode === 'signup'
     ? auth.createUserWithEmailAndPassword(email, password)
     : auth.signInWithEmailAndPassword(email, password);
-
   promise
     .then(function() { setAuthLoading(false); })
     .catch(function(err) {
@@ -2295,31 +2666,25 @@ function signOutUser() {
     .catch(function(err) { toast("Sign out failed", "error"); });
 }
 
-// ==================== Auth State ====================
 auth.onAuthStateChanged(function(user) {
   var loginScreen = document.getElementById('loginScreen');
   var appContainer = document.getElementById('appContainer');
-
   if (user) {
     currentUser = user;
     loginScreen.classList.add('hidden');
     appContainer.style.display = 'block';
-
     var email = user.email || 'user';
     var name = user.displayName || email.split('@')[0];
     var initial = (name || 'U').charAt(0).toUpperCase();
-
     var avatarEl = document.getElementById('userAvatar');
     if (user.photoURL) {
       avatarEl.innerHTML = '<img src="' + user.photoURL + '" alt="">';
     } else {
       avatarEl.textContent = initial;
     }
-
     document.getElementById('userName').textContent = name;
     document.getElementById('userEmail').textContent = email;
     document.getElementById('userEmailShort').textContent = name;
-
     loadUserData();
   } else {
     currentUser = null;
@@ -2330,7 +2695,7 @@ auth.onAuthStateChanged(function(user) {
   }
 });
 
-// ==================== Bind Events ====================
+// ==================== Events ====================
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('googleBtn').addEventListener('click', signInWithGoogle);
   document.getElementById('emailAuthBtn').addEventListener('click', emailAuth);
@@ -2348,13 +2713,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (e.target.closest('.user-dropdown')) return;
     document.getElementById('userDropdown').classList.toggle('show');
   });
-
   document.getElementById('logoutBtn').addEventListener('click', function(e) {
     e.stopPropagation();
     document.getElementById('userDropdown').classList.remove('show');
     signOutUser();
   });
-
   document.addEventListener('click', function(e) {
     if (!e.target.closest('#userMenu')) {
       document.getElementById('userDropdown').classList.remove('show');
@@ -2362,7 +2725,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   document.getElementById('generateBtn').addEventListener('click', generate);
-  document.getElementById('saveBtn').addEventListener('click', saveData);
+  document.getElementById('saveBtn').addEventListener('click', startSave);
 
   document.getElementById('passLength').addEventListener('input', function() {
     document.getElementById('lenVal').textContent = this.value;
@@ -2378,7 +2741,6 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   document.getElementById('searchBox').addEventListener('input', renderHistory);
-
   document.getElementById('exportBtn').addEventListener('click', openDownloadModal);
   document.getElementById('closeDownloadBtn').addEventListener('click', closeDownloadModal);
   document.getElementById('clearBtn').addEventListener('click', askClearAll);
@@ -2393,6 +2755,24 @@ document.addEventListener('DOMContentLoaded', function() {
     if (e.target.id === 'downloadModal') closeDownloadModal();
   });
 
+  // Email prompt modal
+  document.getElementById('emailSkipBtn').addEventListener('click', saveSkipEmail);
+  document.getElementById('emailAddBtn').addEventListener('click', saveWithEmail);
+  document.getElementById('modalEmailInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') saveWithEmail();
+  });
+  document.getElementById('emailModal').addEventListener('click', function(e) {
+    if (e.target.id === 'emailModal') closeEmailModal();
+  });
+
+  // Edit modal
+  document.getElementById('editCancelBtn').addEventListener('click', closeEditModal);
+  document.getElementById('editSaveBtn').addEventListener('click', saveEdit);
+  document.getElementById('editModal').addEventListener('click', function(e) {
+    if (e.target.id === 'editModal') closeEditModal();
+  });
+
+  // Confirm modal
   document.getElementById('confirmCancelBtn').addEventListener('click', closeConfirm);
   document.getElementById('confirmOkBtn').addEventListener('click', function() {
     if (pendingDeleteId) doDeleteOne();
@@ -2402,11 +2782,11 @@ document.addEventListener('DOMContentLoaded', function() {
     if (e.target.id === 'confirmModal') closeConfirm();
   });
 
+  // Referral
   document.getElementById('copyLinkBtn').addEventListener('click', function(e) {
     e.preventDefault();
     performCopy(REF_LINK, this);
   });
-
   document.getElementById('openLinkBtn').addEventListener('click', function(e) {
     e.preventDefault();
     try {
