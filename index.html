@@ -1959,14 +1959,22 @@ firebase.initializeApp(firebaseConfig);
 var auth = firebase.auth();
 var db = firebase.firestore();
 
-// 🔐 Persistence: বন্ধ করলেও login থাকবে
+// 🔐 MAXIMUM Persistence
 auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
   .then(function() {
-    console.log('✅ Persistence: LOCAL (login will persist)');
+    console.log('✅ Persistence: LOCAL (maximum)');
   })
   .catch(function(err) {
     console.error('❌ Persistence failed:', err);
   });
+
+// 🧠 Last email hint (better UX after browser clear)
+function saveLastEmail(email) {
+  try { localStorage.setItem('colgen_last_email', email || ''); } catch(e){}
+}
+function getLastEmail() {
+  try { return localStorage.getItem('colgen_last_email') || ''; } catch(e){ return ''; }
+}
 
 var REF_LINK = 'https://zulti.com/?r=UEQFEDAPKJ';
 
@@ -2683,14 +2691,16 @@ function signInWithGoogle() {
   var provider = new firebase.auth.GoogleAuthProvider();
   provider.setCustomParameters({ prompt: 'select_account' });
 
-  // Ensure LOCAL persistence before signing in
   auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     .then(function() {
       return auth.signInWithPopup(provider);
     })
     .then(function(result) {
       setAuthLoading(false);
-      toast("Welcome back, " + (result.user.displayName || 'User') + "!", "success");
+      if (result.user && result.user.email) {
+        saveLastEmail(result.user.email);
+      }
+      toast("Welcome back!", "success");
     })
     .catch(function(err) {
       setAuthLoading(false);
@@ -2710,7 +2720,6 @@ function emailAuth() {
   hideAuthError();
   setAuthLoading(true);
 
-  // Ensure LOCAL persistence before signing in
   auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
     .then(function() {
       var promise = authMode === 'signup'
@@ -2720,6 +2729,9 @@ function emailAuth() {
     })
     .then(function(result) {
       setAuthLoading(false);
+      if (result.user && result.user.email) {
+        saveLastEmail(result.user.email);
+      }
       if (authMode === 'signup') {
         toast("Account created!", "success");
       } else {
@@ -2744,7 +2756,6 @@ auth.onAuthStateChanged(function(user) {
   var appContainer = document.getElementById('appContainer');
   var loader = document.getElementById('authLoader');
 
-  // Hide loader
   if (loader) {
     loader.style.opacity = '0';
     setTimeout(function() {
@@ -2756,6 +2767,9 @@ auth.onAuthStateChanged(function(user) {
     currentUser = user;
     loginScreen.classList.add('hidden');
     appContainer.style.display = 'block';
+
+    if (user.email) saveLastEmail(user.email);
+
     var email = user.email || 'user';
     var name = user.displayName || email.split('@')[0];
     var initial = (name || 'U').charAt(0).toUpperCase();
@@ -2775,6 +2789,15 @@ auth.onAuthStateChanged(function(user) {
     loginScreen.classList.remove('hidden');
     appContainer.style.display = 'none';
     document.getElementById('passwordInput').value = '';
+
+    // 🧠 Auto-fill last used email (better UX after browser clear)
+    var lastEmail = getLastEmail();
+    if (lastEmail && !document.getElementById('emailInput').value) {
+      document.getElementById('emailInput').value = lastEmail;
+      setTimeout(function() {
+        document.getElementById('passwordInput').focus();
+      }, 300);
+    }
   }
 });
 
